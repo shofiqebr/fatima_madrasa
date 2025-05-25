@@ -2,6 +2,8 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import authRouter from './module/auth/auth.router';
 import cookieParser from "cookie-parser";
+import { studentRoutes } from './module/student/student.router';
+
 
 const app: Application = express();
 
@@ -29,6 +31,7 @@ app.use(cors({
 app.use(express.urlencoded({ extended: true }));
 
 app.use(authRouter);
+app.use(studentRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send("Hello from bike store");
