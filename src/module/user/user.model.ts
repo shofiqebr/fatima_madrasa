@@ -1,80 +1,44 @@
-import mongoose, { Schema } from "mongoose";
-import bcrypt from "bcrypt";
-import TUserModel, { IUser, IUserMethods } from "./user.interface";
-import { USER_ROLE } from "./user.constrants";
-import config from "../../app/config";
+// src/modules/user/user.model.ts
+import { Schema, model, Model } from 'mongoose';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { IUser, IUserMethods } from './user.interface';
 
-const UserSchema = new Schema<IUser, TUserModel, IUserMethods>(
+type TUserModel = Model<IUser, {}, IUserMethods>;
+
+const userSchema = new Schema<IUser, TUserModel, IUserMethods>(
   {
-    name: { type: String, required: true, trim: true },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      immutable: true,
-      trim: true,
-    },
-    password: { type: String, required: true, select: false },
+    name: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
     role: {
       type: String,
-      enum: Object.values(USER_ROLE),
-      default: USER_ROLE.customer,
+      enum: ['admin', 'teacher', 'student'],
+      required: true,
     },
-    phone: { type: String, default: "N/A" },
-    address: { type: String, default: "N/A" },
-    city: { type: String, default: "N/A" },
+    phone: String,
+    address: String,
+    city: String,
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-// Hash password before saving
-UserSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const user = this;
-
-  // Check if the password is being modified
-  if (!user.isModified('password')) {
-      return next();
-  }
-
-  // Ensure password is present
-  if (!user.password) {
-      throw new Error('Password is required for hashing.');
-  }
-
-  // Ensure bcrypt salt rounds are set properly
-  const saltRounds = Number(config.bcrypt_salt_rounds);
-  if (isNaN(saltRounds) || saltRounds <= 0) {
-      throw new Error('Invalid bcrypt salt rounds configuration.');
-  }
-
-  // Hash the password
-  user.password = await bcrypt.hash(user.password, saltRounds);
-
+// Hash password before save
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  const hashed = await bcrypt.hash(this.password, 10);
+  this.password = hashed;
   next();
 });
 
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
 
-UserSchema.post('save', function(doc, next){
-  doc.password = '';
-  next();
-})
+userSchema.methods.generateToken = function () {
+  return jwt.sign({ id: this._id, role: this.role }, process.env.JWT_SECRET!, {
+    expiresIn: '7d',
+  });
+};
 
-// Generate JWT token method
-// UserSchema.methods.generateToken = function (): string {
-//   if (!config.jwt.access_secret) {
-//     throw new Error("JWT secret is missing");
-//   }
-
-//   return jwt.sign(
-//     { email: this.email, role: this.role }, // Payload
-//     config.jwt.access_secret, // Secret key
-//     { expiresIn: config.jwt.access_expires_in } // Options
-//   );
-// };
-
-const User = mongoose.model<IUser, TUserModel>("User", UserSchema);
-
-export default User;
+export const UserModel = model<IUser, TUserModel>('User', userSchema);

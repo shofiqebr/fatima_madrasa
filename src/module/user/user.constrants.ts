@@ -1,4 +1,6 @@
-export enum USER_ROLE  {
-    admin = 'admin',
-    customer = 'customer'
+
+export enum USER_ROLE {
+  ADMIN = 'admin',
+  TEACHER = 'teacher',
+  STUDENT = 'student',
 }

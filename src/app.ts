@@ -3,6 +3,7 @@ import cors from 'cors';
 import authRouter from './module/auth/auth.router';
 import cookieParser from "cookie-parser";
 import { studentRoutes } from './module/student/student.router';
+import userRouter from './module/user/user.router';
 
 
 const app: Application = express();
@@ -31,6 +32,7 @@ app.use(cors({
 app.use(express.urlencoded({ extended: true }));
 
 app.use(authRouter);
+app.use("/api",userRouter);
 app.use(studentRoutes);
 
 app.get('/', (req: Request, res: Response) => {

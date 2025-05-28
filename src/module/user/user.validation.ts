@@ -1,35 +1,27 @@
-import { z } from "zod";
-import { USER_ROLE } from "./user.constrants";
+// src/modules/user/user.validation.ts
+import { z } from 'zod';
+import { USER_ROLE } from './user.constrants';
 
-const userValidationSchema = z.object({
+export const createUserSchema = z.object({
   body: z.object({
-    name: z.string().min(1, { message: "Name is required" }),
-
-    email: z.string().email({ message: "Invalid email format" }),
-
-    role: z
-      .enum(Object.values(USER_ROLE) as [string, ...string[]])
-      .default("customer")
-      .optional(),
-
-    phone: z
-      .string()
-      // .regex(/^\d{3,15}$/, { message: "Phone number must be 3-15 digits" })
-      .optional(),
-
-    address: z.string().max(100, { message: "Address cannot exceed 100 characters" }).optional(),
-
-    city: z.string().max(50, { message: "City cannot exceed 50 characters" }).optional(),
+    name: z.string(),
+    email: z.string().email(),
+    password: z.string().min(6),
+    role: z.nativeEnum(USER_ROLE),
+    phone: z.string().optional(),
+    address: z.string().optional(),
+    city: z.string().optional(),
   }),
 });
 
-const loginValidationSchema = z.object({
+export const updateUserSchema = z.object({
   body: z.object({
-    email: z.string().email({ message: "Invalid email format" }),
+    name: z.string().optional(),
+    email: z.string().email().optional(),
+    password: z.string().min(6).optional(),
+    role: z.nativeEnum(USER_ROLE).optional(),
+    phone: z.string().optional(),
+    address: z.string().optional(),
+    city: z.string().optional(),
   }),
 });
-
-export const UserValidation = {
-  userValidationSchema,
-  loginValidationSchema,
-};
