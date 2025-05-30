@@ -1,46 +1,43 @@
+// src/modules/student/student.validation.ts
+
 import { z } from 'zod';
 
-export const createStudentZodSchema = z.object({
+export const createStudentWithUserZodSchema = z.object({
   body: z.object({
-    academicYear: z.string().min(4, 'Academic year is required'), // e.g., "2021-2022"
-    class: z.string().min(1, 'Class is required'),
+    user: z.object({
+      name: z.string(),
+      email: z.string().email(),
+      phone: z.string().optional(),
+      // password is auto-generated, no need here
+    }),
+    academicYear: z.string(),
+    class: z.string(),
     isNewAdmission: z.boolean(),
-    studentId: z.string().min(1, 'Student ID is required'),
-
-    admissionFormSerial: z.string().optional(),
+    studentId: z.string(),
     admissionFeeReceived: z.boolean(),
-    admissionFeeAmount: z.number().optional(),
-
     permanentAddress: z.object({
       village: z.string(),
       postOffice: z.string(),
       upazila: z.string(),
       district: z.string(),
     }),
-
-    currentAddress: z.string().min(1, 'Current address is required'),
+    currentAddress: z.string(),
     isResidential: z.boolean(),
-
-    fullName: z.string().min(1, 'Full name is required'),
+    fullName: z.string(),
     gender: z.enum(['Male', 'Female']),
-    rollNumber: z.string().optional(),
-
-    fatherName: z.string().min(1, 'Father name is required'),
-    motherName: z.string().min(1, 'Mother name is required'),
-    dateOfBirth: z.string().refine((val) => !isNaN(Date.parse(val)), {
-      message: 'Invalid date format',
-    }),
-
-    nidOrBirthCertNo: z.string().min(1, 'NID or Birth Cert No is required'),
-    nationality: z.string().min(1, 'Nationality is required'),
-    bloodGroup: z.string().optional(),
-
+    rollNumber: z.string(),
+    fatherName: z.string(),
+    motherName: z.string(),
+    dateOfBirth: z.string(),
+    nidOrBirthCertNo: z.string(),
+    nationality: z.string(),
     smsConsent: z.boolean(),
-
+    financialStatus: z.enum(['Poor', 'MiddleClass', 'Rich', 'Orphan', 'Needy']),
+    bloodGroup: z.string().optional(),
+    admissionFormSerial: z.string().optional(),
+    admissionFeeAmount: z.number().optional(),
     guardianRelation: z.string().optional(),
     identificationMark: z.string().optional(),
     comments: z.string().optional(),
-
-    financialStatus: z.enum(['Poor', 'MiddleClass', 'Rich', 'Orphan', 'Needy']),
   }),
 });

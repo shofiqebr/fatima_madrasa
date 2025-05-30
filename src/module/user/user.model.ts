@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 // src/modules/user/user.model.ts
 import { Schema, model, Model } from 'mongoose';
 import bcrypt from 'bcrypt';

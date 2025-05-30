@@ -2,7 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import authRouter from './module/auth/auth.router';
 import cookieParser from "cookie-parser";
-import { studentRoutes } from './module/student/student.router';
+import studentRouter, { studentRoutes } from './module/student/student.router';
 import userRouter from './module/user/user.router';
 
 
@@ -31,9 +31,9 @@ app.use(cors({
 }));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(authRouter);
 app.use("/api",userRouter);
-app.use(studentRoutes);
+app.use("/api",studentRouter);
+
 
 app.get('/', (req: Request, res: Response) => {
   res.send("Hello from bike store");

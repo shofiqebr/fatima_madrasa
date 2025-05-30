@@ -7,9 +7,9 @@ import validateRequest from '../../middlewares/validateRequest';
 const userRouter = express.Router();
 
 userRouter.post('/user/create-user', validateRequest(createUserSchema), UserController.createUserController);
-userRouter.get('/', UserController.getAllUsersController);
-userRouter.get('/:id', UserController.getSingleUserController);
-userRouter.patch('/:id', validateRequest(updateUserSchema), UserController.updateUserController);
-userRouter.delete('/:id', UserController.deleteUserController);
+userRouter.get('/user', UserController.getAllUsersController);
+userRouter.get('/user/:id', UserController.getSingleUserController);
+userRouter.patch('/user/:id', validateRequest(updateUserSchema), UserController.updateUserController);
+userRouter.delete('/user/:id', UserController.deleteUserController);
 
 export default userRouter;
