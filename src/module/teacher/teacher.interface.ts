@@ -8,7 +8,7 @@ export interface ITeacher {
   user: Types.ObjectId; // Reference to User
 
   name: string;
-  email: string;
+  teacherId: string;
   phone: string;
   gender: TGender;
   dateOfBirth: string; // e.g. '1990-05-12'

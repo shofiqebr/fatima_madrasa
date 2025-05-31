@@ -6,7 +6,7 @@ export const createStudentWithUserZodSchema = z.object({
   body: z.object({
     user: z.object({
       name: z.string(),
-      email: z.string().email(),
+      // email: z.string().email(),
       phone: z.string().optional(),
       // password is auto-generated, no need here
     }),

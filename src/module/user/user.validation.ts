@@ -5,7 +5,7 @@ import { USER_ROLE } from './user.constrants';
 export const createUserSchema = z.object({
   body: z.object({
     name: z.string(),
-    email: z.string().email(),
+    // email: z.string().email(),
     password: z.string().min(6),
     role: z.nativeEnum(USER_ROLE),
     phone: z.string().optional(),
@@ -17,7 +17,7 @@ export const createUserSchema = z.object({
 export const updateUserSchema = z.object({
   body: z.object({
     name: z.string().optional(),
-    email: z.string().email().optional(),
+    // email: z.string().email().optional(),
     password: z.string().min(6).optional(),
     role: z.nativeEnum(USER_ROLE).optional(),
     phone: z.string().optional(),

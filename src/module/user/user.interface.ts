@@ -2,7 +2,7 @@ import { USER_ROLE } from "./user.constrants";
 
 export interface IUser {
   name: string;
-  email: string;
+  // email: string;
   password: string;
   role: USER_ROLE;
   phone?: string;
