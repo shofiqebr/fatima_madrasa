@@ -1,9 +1,10 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import authRouter from './module/auth/auth.router';
+
 import cookieParser from "cookie-parser";
-import studentRouter, { studentRoutes } from './module/student/student.router';
+import studentRouter from './module/student/student.router';
 import userRouter from './module/user/user.router';
+import { teacherRouter } from './module/teacher/teacher.router';
 
 
 const app: Application = express();
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api",userRouter);
 app.use("/api",studentRouter);
+app.use("/api",teacherRouter);
 
 
 app.get('/', (req: Request, res: Response) => {
