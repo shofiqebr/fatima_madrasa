@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import studentRouter from './module/student/student.router';
 import userRouter from './module/user/user.router';
 import { teacherRouter } from './module/teacher/teacher.router';
+import homeworkRouter from './module/homework/homework.router';
+import noticeRouter from './module/notice/notice.router';
 
 
 const app: Application = express();
@@ -35,6 +37,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api",userRouter);
 app.use("/api",studentRouter);
 app.use("/api",teacherRouter);
+app.use("/api",homeworkRouter);
+app.use("/api",noticeRouter);
 
 
 app.get('/', (req: Request, res: Response) => {

@@ -19,7 +19,7 @@ const studentSchema = new Schema<IStudent>(
     academicYear: { type: String, required: true },
     class: { type: String, required: true },
     isNewAdmission: { type: Boolean, required: true },
-    studentId: { type: String, required: true, unique: true },
+    // studentId: { type: String, required: true, unique: true },
 
     admissionFormSerial: String,
     admissionFeeReceived: { type: Boolean, required: true },

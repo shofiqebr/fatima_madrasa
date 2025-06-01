@@ -12,7 +12,7 @@ const teacherSchema = new Schema<ITeacher>(
       required: true,
     },
     name: { type: String, required: true },
-    teacherId: { type: String, required: true, unique: true },
+    // id: { type: String, required: true, unique: true },
     phone: { type: String, required: true },
     gender: { type: String, enum: ['Male', 'Female'], required: true },
     dateOfBirth: { type: String, required: true },

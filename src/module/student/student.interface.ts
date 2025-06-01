@@ -17,7 +17,7 @@ export interface IStudent {
   academicYear: string; // e.g., "2021-2022"
   class: string; // e.g., "Class 5"
   isNewAdmission: boolean;
-  studentId: string; // Institute-issued ID
+  // studentId: string; // Institute-issued ID
 
   admissionFormSerial?: string;
   admissionFeeReceived: boolean;

@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { ITeacher } from '../teacher/teacher.interface';
+import { ITeacher } from './teacher.interface';
 import { TeacherService } from './teacher.service';
-
 
 export const TeacherController = {
   createTeacher: catchAsync(async (req: Request, res: Response) => {

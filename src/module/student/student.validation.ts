@@ -13,7 +13,7 @@ export const createStudentWithUserZodSchema = z.object({
     academicYear: z.string(),
     class: z.string(),
     isNewAdmission: z.boolean(),
-    studentId: z.string(),
+    // studentId: z.string(),
     admissionFeeReceived: z.boolean(),
     permanentAddress: z.object({
       village: z.string(),
