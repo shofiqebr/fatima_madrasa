@@ -7,6 +7,7 @@ import userRouter from './module/user/user.router';
 import { teacherRouter } from './module/teacher/teacher.router';
 import homeworkRouter from './module/homework/homework.router';
 import noticeRouter from './module/notice/notice.router';
+import resultRouter from './module/result/result.router';
 
 
 const app: Application = express();
@@ -39,6 +40,7 @@ app.use("/api",studentRouter);
 app.use("/api",teacherRouter);
 app.use("/api",homeworkRouter);
 app.use("/api",noticeRouter);
+app.use("/api",resultRouter);
 
 
 app.get('/', (req: Request, res: Response) => {
