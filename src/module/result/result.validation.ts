@@ -1,17 +1,31 @@
+// result.validator.ts
 import { z } from 'zod';
 
-export const createResultZodSchema = z.object({
-  student: z.string({ required_error: 'Student ID is required' }),
-  academicYear: z.string({ required_error: 'Required' }),
-  term: z.enum(['First Term', 'Mid Term', 'Final Term'], { required_error: 'Required' }),
-  class: z.string({ required_error: 'Required' }),
-  subjects: z.array(z.object({
-    name: z.string(),
-    fullMarks: z.number(),
-    obtainedMarks: z.number(),
-    grade: z.string().optional(),
-    gpa: z.number().optional(),
-    comments: z.string().optional()
-  }))
+const subjectSchema = z.object({
+  name: z.string(),
+  fullMarks: z.number(),
+  obtainedMarks: z.number(),
+  grade: z.string().optional(),
+  gpa: z.number().optional()
 });
+
+// export const createResultSchema = z.object({
+//   student: z.string().min(1, "Student ID is required"),
+//   academicYear: z.string().min(1, "Academic year is required"),
+//   term: z.enum(["First Term", "Mid Term", "Final Term"]),
+//   class: z.string().min(1, "Class is required"),
+//   subjects: z.array(subjectSchema).min(1, "At least one subject required")
+// });
+
+
+//should be change 
+export const createResultSchema = z
+  .object({
+    student: z.string().optional(),
+    academicYear: z.string().optional(),
+    term: z.enum(["First Term", "Mid Term", "Final Term"]).optional(),
+    class: z.string().optional(),
+    subjects: z.array(subjectSchema).optional()
+  })
+  .passthrough(); // Optional: to allow other fields too
 

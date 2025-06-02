@@ -1,18 +1,36 @@
-import { z } from 'zod';
+import mongoose, { Schema, model } from 'mongoose';
+import { IResult } from './result.interface'; // Adjust the path as needed
 
-export const createResultZodSchema = z.object({
-  student: z.string({ required_error: 'Student ID is required' }),
-  academicYear: z.string({ required_error: 'Required' }),
-  term: z.enum(['First Term', 'Mid Term', 'Final Term'], { required_error: 'Required' }),
-  class: z.string({ required_error: 'Required' }),
-  subjects: z.array(
-    z.object({
-      name: z.string(),
-      fullMarks: z.number(),
-      obtainedMarks: z.number(),
-      grade: z.string().optional(),
-      gpa: z.number().optional(),
-      comments: z.string().optional()
-    })
-  )
-});
+const SubjectResultSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    fullMarks: { type: Number, required: true },
+    obtainedMarks: { type: Number, required: true },
+    grade: { type: String },
+    gpa: { type: Number },
+    comments: { type: String },
+  },
+  { _id: false } // prevent automatic _id for subdocuments
+);
+
+const ResultSchema = new Schema<IResult>(
+  {
+    student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
+    academicYear: { type: String, required: true },
+    term: {
+      type: String,
+      enum: ['First Term', 'Mid Term', 'Final Term'],
+      required: true,
+    },
+    class: { type: String, required: true },
+    subjects: { type: [SubjectResultSchema], required: true },
+    totalMarks: { type: Number },
+    averageGPA: { type: Number },
+    overallGrade: { type: String },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export const Result = model<IResult>('Result', ResultSchema);
