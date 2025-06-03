@@ -8,6 +8,8 @@ import { teacherRouter } from './module/teacher/teacher.router';
 import homeworkRouter from './module/homework/homework.router';
 import noticeRouter from './module/notice/notice.router';
 import resultRouter from './module/result/result.router';
+import paymentRouter from './module/payment/payment.router';
+import attendanceRouter from './module/attendance/attendance.router';
 
 
 const app: Application = express();
@@ -41,6 +43,8 @@ app.use("/api",teacherRouter);
 app.use("/api",homeworkRouter);
 app.use("/api",noticeRouter);
 app.use("/api",resultRouter);
+app.use("/api",paymentRouter);
+app.use("/api",attendanceRouter);
 
 
 app.get('/', (req: Request, res: Response) => {
