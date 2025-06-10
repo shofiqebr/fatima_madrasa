@@ -11,6 +11,9 @@ const user_router_1 = __importDefault(require("./module/user/user.router"));
 const teacher_router_1 = require("./module/teacher/teacher.router");
 const homework_router_1 = __importDefault(require("./module/homework/homework.router"));
 const notice_router_1 = __importDefault(require("./module/notice/notice.router"));
+const result_router_1 = __importDefault(require("./module/result/result.router"));
+const payment_router_1 = __importDefault(require("./module/payment/payment.router"));
+const attendance_router_1 = __importDefault(require("./module/attendance/attendance.router"));
 const app = (0, express_1.default)();
 // Allow multiple origins dynamically
 const allowedOrigins = [
@@ -39,6 +42,9 @@ app.use("/api", student_router_1.default);
 app.use("/api", teacher_router_1.teacherRouter);
 app.use("/api", homework_router_1.default);
 app.use("/api", notice_router_1.default);
+app.use("/api", result_router_1.default);
+app.use("/api", payment_router_1.default);
+app.use("/api", attendance_router_1.default);
 app.get('/', (req, res) => {
     res.send("Hello from bike store");
 });

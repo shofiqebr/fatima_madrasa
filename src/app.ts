@@ -10,6 +10,7 @@ import noticeRouter from './module/notice/notice.router';
 import resultRouter from './module/result/result.router';
 import paymentRouter from './module/payment/payment.router';
 import attendanceRouter from './module/attendance/attendance.router';
+import authRouter from './module/auth/auth.router';
 
 
 const app: Application = express();
@@ -18,7 +19,7 @@ const app: Application = express();
 const allowedOrigins = [
   // "https://bike-store-front.vercel.app",
   // "https://bike-store-blush.vercel.app",
-  "http://localhost:5173"
+  "http://localhost:3000"
 ];
 
 app.use(cookieParser());
@@ -37,6 +38,7 @@ app.use(cors({
 }));
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api",authRouter);
 app.use("/api",userRouter);
 app.use("/api",studentRouter);
 app.use("/api",teacherRouter);
