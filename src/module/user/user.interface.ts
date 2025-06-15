@@ -8,6 +8,7 @@ export interface IUser {
   phone?: string;
   address?: string;
   city?: string;
+  isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -15,4 +16,4 @@ export interface IUser {
 export interface IUserMethods {
   comparePassword(candidatePassword: string): Promise<boolean>;
   generateToken(): string;
-}
+} 

@@ -43,6 +43,7 @@ const studentSchema = new Schema<IStudent>(
     bloodGroup: String,
 
     smsConsent: { type: Boolean, required: true },
+     isActive: { type: Boolean, default: true },
 
     guardianRelation: String,
     identificationMark: String,

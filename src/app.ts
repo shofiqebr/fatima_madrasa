@@ -11,6 +11,8 @@ import resultRouter from './module/result/result.router';
 import paymentRouter from './module/payment/payment.router';
 import attendanceRouter from './module/attendance/attendance.router';
 import authRouter from './module/auth/auth.router';
+import classRouter from './module/class/class.router';
+import subjectRouter from './module/subject/subject.router';
 
 
 const app: Application = express();
@@ -47,6 +49,8 @@ app.use("/api",noticeRouter);
 app.use("/api",resultRouter);
 app.use("/api",paymentRouter);
 app.use("/api",attendanceRouter);
+app.use('/api', classRouter);
+app.use('/api', subjectRouter);
 
 
 app.get('/', (req: Request, res: Response) => {

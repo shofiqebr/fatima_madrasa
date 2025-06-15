@@ -46,6 +46,7 @@ export interface IStudent {
   comments?: string;
 
   financialStatus: TFinancialStatus; // অর্থনৈতিক অবস্থা
+  isActive: boolean;
 
   // Optional metadata
   createdAt?: Date;

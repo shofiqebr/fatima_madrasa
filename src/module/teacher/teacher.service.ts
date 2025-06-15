@@ -21,7 +21,7 @@ export const createTeacher = async (payload: ITeacher): Promise<ITeacher> => {
 
     const userPayload = {
       name: payload.name,
-      // id: payload.id,
+      id: payload.id,
       phone: payload.phone,
       password: hashedPassword,
       role: USER_ROLE.TEACHER,
