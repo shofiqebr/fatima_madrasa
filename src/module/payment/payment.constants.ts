@@ -1,4 +1,3 @@
-
 export enum PAYMENT_TYPE {
   STUDENT = "Student",
   TEACHER = "Teacher",
@@ -18,4 +17,12 @@ export enum TEACHER_PAYMENT_ITEM_TYPE {
   BONUS = "Bonus",
   DEDUCTION = "Deduction",
   INCREMENT = "Increment",
+}
+
+export enum DONATION_PAYMENT_ITEM_TYPE {
+  ZAKAT = "Zakat",
+  GENERAL = "General",
+  SADAQAH = "Sadaqah",
+  FITRAH = "Fitrah",
+  OTHER = "Other",
 }

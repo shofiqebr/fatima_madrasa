@@ -7,8 +7,11 @@ export const HomeworkService = {
   },
 
   getAllHomework: async () => {
-    return await HomeworkModel.find().sort({ dueDate: -1 });
-  },
+   return await HomeworkModel.find()
+    .populate('classId', 'name')      // get class name only
+    .populate('subjectId', 'name')    // get subject name only
+    .populate('assignedBy', 'name');  // get assignedBy name only
+},
 
   getSingleHomework: async (id: string) => {
     return await HomeworkModel.findById(id);

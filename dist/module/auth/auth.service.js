@@ -12,46 +12,38 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthService = void 0;
-const config_1 = __importDefault(require("../../app/config"));
-const user_model_1 = __importDefault(require("../user/user.model"));
+exports.authService = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const register = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.default.create(payload);
-    return result;
-});
-const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield user_model_1.default.find(); // Fetch all users
-    return users;
-});
+const user_model_1 = require("../user/user.model");
+const config_1 = __importDefault(require("../../app/config"));
 const login = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield user_model_1.default.findOne({ email: payload === null || payload === void 0 ? void 0 : payload.email }).select("+password");
+    const user = yield user_model_1.UserModel.findOne({ id: payload === null || payload === void 0 ? void 0 : payload.id }).select('+password');
     if (!user) {
-        throw new Error("This user is not found !");
+        throw new Error('User not found!');
     }
-    // const isBlocked = user?.isBlocked
-    // if(isBlocked) {
-    //     throw new Error("This user is blocked !!")
-    // }
     const isPasswordMatched = yield bcrypt_1.default.compare(payload === null || payload === void 0 ? void 0 : payload.password, user === null || user === void 0 ? void 0 : user.password);
     if (!isPasswordMatched) {
-        throw new Error('Wrong password!!!');
+        throw new Error('Incorrect password!');
     }
     const jwtPayload = {
-        email: user === null || user === void 0 ? void 0 : user.email,
-        role: user === null || user === void 0 ? void 0 : user.role,
+        _id: user._id,
+        id: user.id,
+        role: user.role,
     };
-    const token = jsonwebtoken_1.default.sign(jwtPayload, config_1.default.jwt.access_secret, { expiresIn: '15d' });
-    console.log("JWT Secret during signing:", config_1.default.jwt.access_secret);
-    return { token, user };
+    const token = jsonwebtoken_1.default.sign(jwtPayload, config_1.default.jwt.access_secret, {
+        expiresIn: '15d',
+    });
+    return {
+        token,
+        user: {
+            _id: user._id,
+            name: user.name,
+            id: user.id,
+            role: user.role,
+        },
+    };
 });
-const logout = () => __awaiter(void 0, void 0, void 0, function* () {
-    return true;
-});
-exports.AuthService = {
-    register,
-    getAllUsers,
+exports.authService = {
     login,
-    logout
 };

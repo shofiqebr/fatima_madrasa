@@ -28,7 +28,7 @@ const createTeacher = (payload) => __awaiter(void 0, void 0, void 0, function* (
         const hashedPassword = yield bcrypt_1.default.hash(defaultPassword, Number(config_1.default.bcrypt_salt_rounds));
         const userPayload = {
             name: payload.name,
-            // id: payload.id,
+            id: payload.id,
             phone: payload.phone,
             password: hashedPassword,
             role: user_constrants_1.USER_ROLE.TEACHER,

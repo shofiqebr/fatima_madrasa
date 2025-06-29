@@ -8,7 +8,7 @@ export const SubjectService = {
   },
 
   getAllSubjects: async () => {
-    return await SubjectModel.find().populate('classId').sort({ createdAt: -1 });
+    return await SubjectModel.find().populate('classId', "name").sort({ createdAt: -1 });
   },
 
   getSingleSubject: async (id: string) => {

@@ -53,7 +53,7 @@ export const createStudent = async (
 
 
 export const getAllStudents = async (): Promise<IStudent[]> => {
-  return await Student.find().populate('user');
+  return await Student.find().populate('user', "role");
 };
 
 export const getSingleStudent = async (id: string): Promise<IStudent | null> => {

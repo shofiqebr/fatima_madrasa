@@ -6,7 +6,7 @@ const zod_1 = require("zod");
 exports.createTeacherZodSchema = zod_1.z.object({
     body: zod_1.z.object({
         name: zod_1.z.string({ required_error: 'Name is required' }),
-        // id: z.string({ required_error: 'teacherId is required' }),
+        id: zod_1.z.string({ required_error: 'teacherId is required' }),
         phone: zod_1.z.string({ required_error: 'Phone number is required' }),
         gender: zod_1.z.enum(['Male', 'Female'], {
             required_error: 'Gender must be either Male or Female',

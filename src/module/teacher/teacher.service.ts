@@ -51,7 +51,7 @@ export const createTeacher = async (payload: ITeacher): Promise<ITeacher> => {
 };
 
 export const getAllTeachers = async (): Promise<ITeacher[]> => {
-  return Teacher.find().populate('user');
+  return Teacher.find().populate('user', "role");
 };
 
 export const getSingleTeacher = async (id: string): Promise<ITeacher | null> => {

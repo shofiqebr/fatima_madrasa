@@ -4,13 +4,12 @@ exports.AuthValidation = void 0;
 const zod_1 = require("zod");
 const loginValidationSchema = zod_1.z.object({
     body: zod_1.z.object({
-        // name: z.string({
-        //   required_error: "Name must be provided "
-        // }),
-        email: zod_1.z.string({
-            required_error: "Email must be provided",
-        }).email(),
-        password: zod_1.z.string({ required_error: 'Password is required' }),
+        id: zod_1.z
+            .string({ required_error: "ID is required" })
+            .min(3, { message: "ID must be at least 3 characters long" }),
+        password: zod_1.z
+            .string({ required_error: "Password is required" })
+            .min(3, { message: "Password must be at least 3 characters long" }),
     }),
 });
 exports.AuthValidation = {

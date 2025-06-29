@@ -8,7 +8,7 @@ exports.createUserSchema = zod_1.z.object({
     body: zod_1.z.object({
         name: zod_1.z.string(),
         // email: z.string().email(),
-        password: zod_1.z.string().min(6),
+        password: zod_1.z.string().min(3),
         role: zod_1.z.nativeEnum(user_constrants_1.USER_ROLE),
         phone: zod_1.z.string().optional(),
         address: zod_1.z.string().optional(),

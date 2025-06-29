@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const globalErrorHandler = (err, req, res, next) => {
-    console.log(err);
+    // console.log(err);
     //setting default values
     let message = err.message || "Internal Server Error";
     const statusCode = err.statusCode || 500;

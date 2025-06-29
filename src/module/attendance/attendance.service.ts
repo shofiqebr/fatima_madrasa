@@ -6,7 +6,7 @@ const createAttendance = async (payload: IAttendance) => {
 };
 
 const getAllAttendances = async () => {
-  return await Attendance.find().populate('userId');
+  return await Attendance.find().populate('userId', " id name");
 };
 
 const getSingleAttendance = async (id: string) => {

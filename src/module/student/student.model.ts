@@ -31,7 +31,7 @@ const studentSchema = new Schema<IStudent>(
 
     fullName: { type: String, required: true },
     gender: { type: String, enum: ['Male', 'Female'], required: true },
-    rollNumber: { type: String, required: true },
+    id: { type: String, required: true },
 
     fatherName: { type: String, required: true },
     phone: { type: String},

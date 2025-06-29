@@ -19,7 +19,10 @@ exports.HomeworkService = {
         return yield homework_model_1.default.create(payload);
     }),
     getAllHomework: () => __awaiter(void 0, void 0, void 0, function* () {
-        return yield homework_model_1.default.find().sort({ dueDate: -1 });
+        return yield homework_model_1.default.find()
+            .populate('classId', 'name') // get class name only
+            .populate('subjectId', 'name') // get subject name only
+            .populate('assignedBy', 'name'); // get assignedBy name only
     }),
     getSingleHomework: (id) => __awaiter(void 0, void 0, void 0, function* () {
         return yield homework_model_1.default.findById(id);

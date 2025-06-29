@@ -1,9 +1,9 @@
 export interface IHomework {
   title: string;
   description: string;
-  classId: string;       // Reference to class
-  subjectId: string;     // Reference to subject
-  dueDate: string;       // ISO format date
-  assignedBy: string;    // userId of teacher/admin
-  attachments?: string[]; // Optional file URLs
+  classId: string | { _id: string; name: string };       // ObjectId or populated
+  subjectId: string | { _id: string; name: string };
+  dueDate: string;
+  assignedBy: string | { _id: string; name: string };
+  attachments?: string[];
 }

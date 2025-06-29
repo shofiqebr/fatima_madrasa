@@ -26,7 +26,7 @@ exports.createStudentWithUserZodSchema = zod_1.z.object({
         isResidential: zod_1.z.boolean(),
         fullName: zod_1.z.string(),
         gender: zod_1.z.enum(['Male', 'Female']),
-        rollNumber: zod_1.z.string(),
+        id: zod_1.z.string(),
         fatherName: zod_1.z.string(),
         motherName: zod_1.z.string(),
         dateOfBirth: zod_1.z.string(),

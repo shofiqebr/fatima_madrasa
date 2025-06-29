@@ -1,5 +1,5 @@
 // src/modules/subject/subject.model.ts
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { ISubject } from './subject.interface';
 
 const subjectSchema = new Schema<ISubject>(

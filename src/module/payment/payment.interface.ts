@@ -1,6 +1,6 @@
 
 import { Types } from "mongoose";
-import { PAYMENT_TYPE, STUDENT_PAYMENT_ITEM_TYPE, TEACHER_PAYMENT_ITEM_TYPE } from "./payment.constants";
+import { DONATION_PAYMENT_ITEM_TYPE, PAYMENT_TYPE, STUDENT_PAYMENT_ITEM_TYPE, TEACHER_PAYMENT_ITEM_TYPE } from "./payment.constants";
 
 export interface IPaymentItem {
   title: string;
@@ -25,4 +25,14 @@ export interface IPayment {
   donorName?: string;
   donorContact?: string;
   description?: string;
+}
+
+export interface DonationPayment {
+  id: string;
+  donorName: string;
+  amount: number;
+  date: string;
+  paymentType: PAYMENT_TYPE.DONATION;
+  donationType: DONATION_PAYMENT_ITEM_TYPE;
+  notes?: string;
 }

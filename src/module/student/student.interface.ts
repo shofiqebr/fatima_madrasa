@@ -29,7 +29,7 @@ export interface IStudent {
 
   fullName: string;
   gender: TGender;
-  rollNumber: string;
+  id: string;
 
   fatherName: string;
   phone?: string;

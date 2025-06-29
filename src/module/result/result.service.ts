@@ -58,7 +58,7 @@ export const createResultService = async (payload: CreateResultInput): Promise<I
 
 // 3. Get All Results
 export const getAllResultsService = async () => {
-  return await Result.find().populate('student');
+  return await Result.find().populate('student', "fullName rollNumber ");
 };
 
 // 4. Get Single Result

@@ -5,10 +5,10 @@ const homeworkSchema = new Schema<IHomework>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    classId: { type: String, required: true },
-    subjectId: { type: String, required: true },
+    classId: { type: Schema.Types.ObjectId, ref: 'Class', required: true },
+    subjectId: { type: Schema.Types.ObjectId, ref: 'Subject', required: true },
     dueDate: { type: String, required: true },
-    assignedBy: { type: String, required: true },
+    assignedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     attachments: [{ type: String }],
   },
   { timestamps: true },

@@ -25,7 +25,7 @@ export const createStudentWithUserZodSchema = z.object({
     isResidential: z.boolean(),
     fullName: z.string(),
     gender: z.enum(['Male', 'Female']),
-    rollNumber: z.string(),
+    id: z.string(),
     fatherName: z.string(),
     motherName: z.string(),
     dateOfBirth: z.string(),
